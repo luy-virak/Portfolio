@@ -8,6 +8,7 @@ import { LANDMARK_POSITIONS } from '../../data/portfolioData';
 interface ExplorerCharacterProps {
   walkTarget: [number, number, number] | null;
   onReachTarget: () => void;
+  onStartManualExplore: () => void;
   characterPosRef: React.MutableRefObject<THREE.Vector3>;
   activeOverlay: ActiveOverlay;
   isExploring: boolean;
@@ -118,6 +119,7 @@ function getResponsiveCameraProfile(width: number, height: number): CameraProfil
 export function ExplorerCharacter({
   walkTarget,
   onReachTarget,
+  onStartManualExplore,
   characterPosRef,
   activeOverlay,
   isExploring,
@@ -143,6 +145,7 @@ export function ExplorerCharacter({
   const walkCycleRef = useRef(0);
   const facingAngleRef = useRef(0);
   const manualRoamRef = useRef(false);
+  const stuckTimerRef = useRef(0);
   const orbitAngleRef = useRef(0);
 
   const initialProfile =
@@ -244,6 +247,10 @@ export function ExplorerCharacter({
     // Manual WASD / Arrow / Touch D-Pad movement overrides click-to-walk target
     if (inputX !== 0 || inputZ !== 0) {
       manualRoamRef.current = true;
+      stuckTimerRef.current = 0;
+      if (!isExploring && activeOverlay === 'none') {
+        onStartManualExplore();
+      }
       if (walkTarget) onReachTarget();
       moveVec.set(inputX, inputZ).normalize();
       vx = moveVec.x * MOVE_SPEED;
@@ -258,9 +265,24 @@ export function ExplorerCharacter({
         vx = (dx / dist) * MOVE_SPEED * speedScale;
         vz = (dz / dist) * MOVE_SPEED * speedScale;
         isMoving = true;
+
+        // Stop auto-walk cleanly if blocked against a tree or building collider
+        const actualHorizontalSpeed = Math.hypot(linvel.x, linvel.z);
+        if (actualHorizontalSpeed < 0.75) {
+          stuckTimerRef.current += delta;
+          if (stuckTimerRef.current > 0.35) {
+            stuckTimerRef.current = 0;
+            onReachTarget();
+          }
+        } else {
+          stuckTimerRef.current = 0;
+        }
       } else {
+        stuckTimerRef.current = 0;
         onReachTarget();
       }
+    } else {
+      stuckTimerRef.current = 0;
     }
 
     // Soft island perimeter boundary guard

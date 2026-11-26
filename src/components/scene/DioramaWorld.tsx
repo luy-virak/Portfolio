@@ -11,6 +11,7 @@ interface DioramaWorldProps {
   walkTarget: [number, number, number] | null;
   onSetWalkTarget: (point: [number, number, number]) => void;
   onClearWalkTarget: () => void;
+  onStartManualExplore: () => void;
   characterPosRef: React.MutableRefObject<THREE.Vector3>;
   activeOverlay: ActiveOverlay;
   isExploring: boolean;
@@ -21,34 +22,34 @@ interface DioramaWorldProps {
 
 const ISLAND_RADIUS = 22.0;
 
-const TREE_COORDS: [number, number, number, boolean][] = [
-  [-17.5, -4.5, 1.35, false],
-  [-16.0, 3.0, 1.2, false],
-  [-14.5, 7.5, 1.1, false],
-  [-18.0, 0.5, 1.4, false],
-  [-15.0, -9.0, 1.25, false],
-  [-12.5, -13.5, 1.3, false],
-  [-8.5, -15.0, 1.15, false],
-  [17.5, -4.0, 1.35, false],
-  [16.5, 3.5, 1.25, false],
-  [15.0, 8.0, 1.15, false],
-  [18.2, 1.0, 1.4, false],
-  [15.5, -9.5, 1.2, false],
-  [12.8, -13.0, 1.3, false],
-  [8.0, -15.5, 1.1, false],
-  [-4.0, -16.5, 1.4, false],
-  [0.0, -17.5, 1.5, false],
-  [4.5, -16.5, 1.35, false],
-  [-6.5, -12.0, 1.1, true],
-  [6.5, -11.5, 1.05, true],
-  [-11.0, 12.0, 1.2, false],
-  [-7.5, 15.0, 1.15, false],
-  [-3.5, 16.5, 1.05, false],
-  [8.0, 14.5, 1.15, false],
-  [12.0, 11.5, 1.2, false],
-  [-7.0, -4.5, 0.95, true],
-  [7.0, -4.5, 0.95, true],
-  [-5.5, 6.2, 0.9, true],
+const TREE_COORDS: [number, number, number][] = [
+  [-17.5, -4.5, 1.35],
+  [-16.0, 3.0, 1.2],
+  [-14.5, 7.5, 1.1],
+  [-18.0, 0.5, 1.4],
+  [-15.0, -9.0, 1.25],
+  [-12.5, -13.5, 1.3],
+  [-8.5, -15.0, 1.15],
+  [17.5, -4.0, 1.35],
+  [16.5, 3.5, 1.25],
+  [15.0, 8.0, 1.15],
+  [18.2, 1.0, 1.4],
+  [15.5, -9.5, 1.2],
+  [12.8, -13.0, 1.3],
+  [8.0, -15.5, 1.1],
+  [-4.0, -16.5, 1.4],
+  [0.0, -17.5, 1.5],
+  [4.5, -16.5, 1.35],
+  [-6.5, -12.0, 1.1],
+  [6.5, -11.5, 1.05],
+  [-11.0, 12.0, 1.2],
+  [-7.5, 15.0, 1.15],
+  [-3.5, 16.5, 1.05],
+  [8.0, 14.5, 1.15],
+  [12.0, 11.5, 1.2],
+  [-7.0, -4.5, 0.95],
+  [7.0, -4.5, 0.95],
+  [-5.5, 6.2, 0.9],
 ];
 
 const CLOUD_CONFIGS = [
@@ -65,40 +66,34 @@ function ConiferTree({
   x,
   z,
   scale,
-  withCollider,
 }: {
   x: number;
   z: number;
   scale: number;
-  withCollider: boolean;
 }) {
   const foliageColors = ['#285632', '#33683e', '#3d7b4a', '#4e8d5b'];
-  const treeContent = (
-    <group position={[x, 0, z]}>
-      <mesh position={[0, 1.1 * scale, 0]} castShadow>
-        <cylinderGeometry args={[0.24 * scale, 0.36 * scale, 2.2 * scale, 8]} />
-        <meshLambertMaterial color="#543621" />
-      </mesh>
-      {foliageColors.map((color, idx) => (
-        <mesh
-          key={color}
-          position={[0, (1.8 + idx * 1.12) * scale, 0]}
-          castShadow
-          receiveShadow
-        >
-          <coneGeometry args={[(2.15 - idx * 0.37) * scale, (1.9 - idx * 0.2) * scale, 7]} />
-          <meshLambertMaterial color={color} />
-        </mesh>
-      ))}
-    </group>
-  );
-
-  if (!withCollider) return treeContent;
 
   return (
-    <RigidBody type="fixed" colliders={false}>
-      <CylinderCollider args={[1.2 * scale, 0.42 * scale]} position={[x, 1.2 * scale, z]} />
-      {treeContent}
+    <RigidBody type="fixed" colliders={false} friction={0}>
+      {/* Solid cylinder collider sized to the pine canopy so the character cannot run through any tree */}
+      <CylinderCollider args={[2.0 * scale, 1.42 * scale]} position={[x, 2.0 * scale, z]} />
+      <group position={[x, 0, z]}>
+        <mesh position={[0, 1.1 * scale, 0]} castShadow>
+          <cylinderGeometry args={[0.24 * scale, 0.36 * scale, 2.2 * scale, 8]} />
+          <meshLambertMaterial color="#543621" />
+        </mesh>
+        {foliageColors.map((color, idx) => (
+          <mesh
+            key={color}
+            position={[0, (1.8 + idx * 1.12) * scale, 0]}
+            castShadow
+            receiveShadow
+          >
+            <coneGeometry args={[(2.15 - idx * 0.37) * scale, (1.9 - idx * 0.2) * scale, 7]} />
+            <meshLambertMaterial color={color} />
+          </mesh>
+        ))}
+      </group>
     </RigidBody>
   );
 }
@@ -186,6 +181,7 @@ export function DioramaWorld({
   walkTarget,
   onSetWalkTarget,
   onClearWalkTarget,
+  onStartManualExplore,
   characterPosRef,
   activeOverlay,
   isExploring,
@@ -269,10 +265,26 @@ export function DioramaWorld({
     if (moved > maxTapSlop) return;
 
     e.stopPropagation();
-    const pt = e.point;
-    const dist = Math.hypot(pt.x, pt.z);
+    let targetX = e.point.x;
+    let targetZ = e.point.z;
+
+    // Push target point cleanly outside any tree canopy radius if clicked directly under a tree
+    for (const [tx, tz, tScale] of TREE_COORDS) {
+      const minClearance = 1.95 * tScale;
+      const dx = targetX - tx;
+      const dz = targetZ - tz;
+      const d = Math.hypot(dx, dz);
+      if (d < minClearance) {
+        const nx = d > 0.001 ? dx / d : 0;
+        const nz = d > 0.001 ? dz / d : 1;
+        targetX = tx + nx * minClearance;
+        targetZ = tz + nz * minClearance;
+      }
+    }
+
+    const dist = Math.hypot(targetX, targetZ);
     if (dist < ISLAND_RADIUS - 1.6) {
-      onSetWalkTarget([pt.x, 0, pt.z]);
+      onSetWalkTarget([targetX, 0, targetZ]);
     }
   };
 
@@ -516,21 +528,16 @@ export function DioramaWorld({
           </group>
         </RigidBody>
 
-        {/* 6. Conifer Pine Forest */}
-        {TREE_COORDS.map(([x, z, scale, withCollider], idx) => (
-          <ConiferTree
-            key={idx}
-            x={x}
-            z={z}
-            scale={scale}
-            withCollider={withCollider}
-          />
+        {/* 6. Conifer Pine Forest (All trees have solid Rapier colliders) */}
+        {TREE_COORDS.map(([x, z, scale], idx) => (
+          <ConiferTree key={idx} x={x} z={z} scale={scale} />
         ))}
 
         {/* 7. Playable Character with Rapier Capsule Physics + Damped Camera */}
         <ExplorerCharacter
           walkTarget={walkTarget}
           onReachTarget={onClearWalkTarget}
+          onStartManualExplore={onStartManualExplore}
           characterPosRef={characterPosRef}
           activeOverlay={activeOverlay}
           isExploring={isExploring}

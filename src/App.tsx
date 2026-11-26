@@ -20,8 +20,15 @@ export default function App() {
   const characterPosRef = useRef<THREE.Vector3>(new THREE.Vector3(0, 0, 5.5));
 
   const handleGroundWalk = useCallback((point: [number, number, number]) => {
+    setActiveOverlay('none');
+    setIsExploring(true);
     setHasManualWalk(true);
     setWalkTarget(point);
+  }, []);
+
+  const handleStartManualExplore = useCallback(() => {
+    setActiveOverlay('none');
+    setIsExploring(true);
   }, []);
 
   const handleNavigateLandmark = useCallback((landmark: LandmarkId) => {
@@ -126,6 +133,7 @@ export default function App() {
               walkTarget={walkTarget}
               onSetWalkTarget={handleGroundWalk}
               onClearWalkTarget={() => setWalkTarget(null)}
+              onStartManualExplore={handleStartManualExplore}
               characterPosRef={characterPosRef}
               activeOverlay={activeOverlay}
               isExploring={isExploring}
