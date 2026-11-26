@@ -1,0 +1,693 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virak's World - Work Showcase Modal</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Epilogue, Space Mono, DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Epilogue:ital,wght@0,500;0,700;0,800;0,900;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            epilogue: ['"Epilogue"', 'sans-serif'],
+            mono: ['"Space Mono"', 'monospace'],
+            sans: ['"DM Sans"', 'sans-serif'],
+          },
+          colors: {
+            parchment: {
+              DEFAULT: '#faf3e4',
+              dim: '#f3e8d2',
+              card: '#fffaf0',
+              border: '#dfcbb4',
+              cardborder: '#e2d1b8',
+              key: '#f3dec2',
+              accent: '#f5e6cc',
+            },
+            terracotta: {
+              DEFAULT: '#d3543a',
+              hover: '#b8422b',
+              light: '#faeae6',
+            },
+            slateindigo: {
+              DEFAULT: '#2d587b',
+              dark: '#1e3d57',
+              light: '#e9f1f6',
+            },
+            walnut: '#2c1d11',
+            timber: '#443224',
+            sage: '#4b7354',
+          },
+          boxShadow: {
+            'craft': '0 24px 60px -12px rgba(44, 29, 17, 0.45), 0 8px 24px -4px rgba(44, 29, 17, 0.25)',
+            'craft-subtle': '0 4px 12px rgba(44, 29, 17, 0.08), 0 1px 3px rgba(44, 29, 17, 0.05)',
+            'tactile-btn': '0 3px 0 #9f3521, 0 6px 12px rgba(211, 84, 58, 0.3)',
+            'tactile-sec': '0 3px 0 #c7b095, 0 4px 8px rgba(44, 29, 17, 0.08)',
+            'keycap': '0 3px 0 #cbaf8f, 0 4px 6px rgba(44, 29, 17, 0.12)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Paper texture & craft decorative styles */
+    .paper-texture {
+      background-color: #faf3e4;
+      background-image: radial-gradient(#d9c3a9 0.75px, transparent 0.75px), radial-gradient(#d9c3a9 0.75px, #faf3e4 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+
+    .linen-card {
+      background-color: #fffaf0;
+      background-image: linear-gradient(0deg, rgba(226, 209, 184, 0.15) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(226, 209, 184, 0.15) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    /* Stitched borders */
+    .dashed-stitch {
+      border: 1.5px dashed #cbb599;
+    }
+
+    /* Golden stroked header text shadow matching Virak's World title aesthetic */
+    .woodcut-title {
+      color: #faf2dc;
+      text-shadow: 
+        -2px -2px 0 #785a3c,  
+         2px -2px 0 #785a3c,
+        -2px  2px 0 #785a3c,
+         2px  2px 0 #785a3c,
+         0 6px 14px rgba(40, 25, 12, 0.55);
+    }
+
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f3e8d2;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbb599;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a98d6c;
+    }
+  </style>
+</head>
+<body class="relative w-screen h-screen overflow-hidden bg-[#1f1712] font-sans select-none">
+
+  <!-- ========================================================================= -->
+  <!-- 1. BACKDROP: 3D DIORAMA SCENE (Soft blurred sky-blue mist, island, sky) -->
+  <!-- ========================================================================= -->
+  <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+    <!-- Sky-blue mist atmospheric backdrop (#dceef5) -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#bfe2ee] via-[#dceef5] to-[#ebdccf] opacity-85"></div>
+
+    <!-- Procedural SVG 3D Floating Terrarium Island (Softly blurred in background) -->
+    <div class="absolute inset-0 flex items-center justify-center filter blur-[6px] scale-105 opacity-80">
+      <svg viewBox="0 0 1200 900" class="w-full h-full max-w-[1300px] object-contain">
+        <defs>
+          <radialGradient id="skyGlow" cx="50%" cy="40%" r="55%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+            <stop offset="60%" stop-color="#dceef5" stop-opacity="0.4" />
+            <stop offset="100%" stop-color="#c6e3ed" stop-opacity="0" />
+          </radialGradient>
+
+          <!-- Island Grass Shading -->
+          <linearGradient id="grassTop" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#9fc27c" />
+            <stop offset="60%" stop-color="#80ab5c" />
+            <stop offset="100%" stop-color="#679144" />
+          </linearGradient>
+
+          <!-- Rock Earth Cliff -->
+          <linearGradient id="cliffRock" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" stop-color="#73543d" />
+            <stop offset="40%" stop-color="#553d2c" />
+            <stop offset="100%" stop-color="#342318" />
+          </linearGradient>
+
+          <!-- Water Pond -->
+          <linearGradient id="pondGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#69c2cf" />
+            <stop offset="100%" stop-color="#4096a6" />
+          </linearGradient>
+
+          <!-- House Roofs -->
+          <linearGradient id="redRoof" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#df5a40" />
+            <stop offset="100%" stop-color="#a4331e" />
+          </linearGradient>
+          <linearGradient id="blueRoof" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#4683b5" />
+            <stop offset="100%" stop-color="#244d73" />
+          </linearGradient>
+          <linearGradient id="goldRoof" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#e9a443" />
+            <stop offset="100%" stop-color="#aa6f1c" />
+          </linearGradient>
+        </defs>
+
+        <!-- Ambient Sky Light -->
+        <circle cx="600" cy="400" r="480" fill="url(#skyGlow)" />
+
+        <!-- Distant Low-Poly Fluffy Orbiting Clouds -->
+        <g opacity="0.85">
+          <!-- Cloud 1 Left -->
+          <ellipse cx="220" cy="260" rx="90" ry="32" fill="#ffffff" />
+          <ellipse cx="260" cy="245" rx="50" ry="38" fill="#ffffff" />
+          <ellipse cx="190" cy="270" rx="60" ry="25" fill="#f4fafc" />
+
+          <!-- Cloud 2 Right -->
+          <ellipse cx="980" cy="310" rx="110" ry="38" fill="#ffffff" />
+          <ellipse cx="940" cy="290" rx="65" ry="42" fill="#ffffff" />
+          <ellipse cx="1030" cy="320" rx="70" ry="28" fill="#f4fafc" />
+
+          <!-- Cloud 3 Floating Near Island Base -->
+          <ellipse cx="440" cy="670" rx="85" ry="28" fill="#ffffff" opacity="0.7" />
+          <ellipse cx="760" cy="690" rx="100" ry="32" fill="#ffffff" opacity="0.6" />
+        </g>
+
+        <!-- Floating Earth & Crag Island Body -->
+        <g id="Island3D">
+          <!-- Bottom Spire Cliff -->
+          <polygon points="320,530 600,780 880,530 600,580" fill="url(#cliffRock)" />
+          <polygon points="460,560 600,780 600,580" fill="#432f22" />
+          <polygon points="600,580 600,780 740,560" fill="#2d1e15" />
+
+          <!-- Top Organic Ground Plate -->
+          <ellipse cx="600" cy="510" rx="360" ry="170" fill="#587e35" />
+          <ellipse cx="600" cy="500" rx="350" ry="160" fill="url(#grassTop)" />
+
+          <!-- Gentle Natural Elevation Rings (Soft rolling knolls) -->
+          <path d="M 330 490 Q 600 450 870 490 Q 600 560 330 490 Z" fill="#8cb964" opacity="0.6" />
+          <ellipse cx="600" cy="480" rx="260" ry="110" fill="#9bc771" opacity="0.5" />
+
+          <!-- Meandering Cobblestone/Sand Trail -->
+          <path d="M 440 500 Q 560 520 600 460 Q 650 420 740 470" fill="none" stroke="#d5be9b" stroke-width="26" stroke-linecap="round" opacity="0.9" />
+          <path d="M 600 460 Q 580 430 560 390" fill="none" stroke="#d5be9b" stroke-width="20" stroke-linecap="round" opacity="0.8" />
+
+          <!-- Center Pond -->
+          <ellipse cx="450" cy="495" rx="75" ry="38" fill="url(#pondGrad)" />
+          <ellipse cx="450" cy="493" rx="68" ry="32" fill="#52abbd" />
+          <circle cx="430" cy="490" r="16" fill="#88dbe8" opacity="0.6" />
+
+          <!-- Conifer Pines / Low-Poly 3D Trees -->
+          <!-- Tree 1 -->
+          <polygon points="360,440 375,410 390,440" fill="#285a3c" />
+          <polygon points="363,425 375,395 387,425" fill="#326e49" />
+          <polygon points="367,405 375,380 383,405" fill="#44865c" />
+          <!-- Tree 2 -->
+          <polygon points="385,460 400,425 415,460" fill="#285a3c" />
+          <polygon points="388,440 400,410 412,440" fill="#326e49" />
+          <polygon points="392,420 400,395 408,420" fill="#44865c" />
+          <!-- Grove Trees East -->
+          <polygon points="790,480 805,445 820,480" fill="#285a3c" />
+          <polygon points="793,460 805,430 817,460" fill="#36744e" />
+          <polygon points="815,495 830,460 845,495" fill="#285a3c" />
+          <polygon points="818,475 830,445 842,475" fill="#36744e" />
+          <!-- North Ridge Trees -->
+          <polygon points="580,380 592,350 604,380" fill="#2e6443" />
+          <polygon points="630,375 642,345 654,375" fill="#285a3c" />
+
+          <!-- Landmark 1: About Me House (Cozy Red Cabin - West) -->
+          <g transform="translate(370, 440)">
+            <rect x="0" y="20" width="46" height="34" fill="#a66e4a" />
+            <polygon points="-5,20 23,-5 51,20" fill="url(#redRoof)" />
+            <rect x="18" y="32" width="12" height="22" fill="#462c19" />
+            <rect x="6" y="26" width="8" height="8" fill="#ffef99" />
+          </g>
+
+          <!-- Landmark 2: My Work Workshop (Timber Workshop - Center North) -->
+          <g transform="translate(570, 390)">
+            <rect x="0" y="24" width="62" height="42" fill="#c39162" />
+            <polygon points="-6,24 31,-6 68,24" fill="url(#blueRoof)" />
+            <rect x="24" y="38" width="16" height="28" fill="#442c1b" />
+            <rect x="8" y="30" width="10" height="12" fill="#ffeaa2" />
+            <rect x="44" y="30" width="10" height="12" fill="#ffeaa2" />
+            <!-- Water wheel / workshop craft accent -->
+            <circle cx="70" cy="50" r="14" fill="#6d482c" stroke="#482d18" stroke-width="3" />
+          </g>
+
+          <!-- Landmark 3: Contact Telegraph Outpost (Tower Station - East) -->
+          <g transform="translate(730, 435)">
+            <rect x="0" y="16" width="48" height="42" fill="#b98458" />
+            <polygon points="-4,16 24,-8 52,16" fill="url(#goldRoof)" />
+            <rect x="18" y="34" width="12" height="24" fill="#4a301d" />
+            <line x1="24" y1="-8" x2="24" y2="-28" stroke="#332115" stroke-width="3" />
+            <circle cx="24" cy="-28" r="4" fill="#d3543a" />
+          </g>
+
+          <!-- Explorer 3D Character Figurine (Standing in plaza) -->
+          <g transform="translate(525, 475)">
+            <!-- Character Shadow -->
+            <ellipse cx="12" cy="30" rx="14" ry="6" fill="#384f27" opacity="0.6" />
+            <!-- Body -->
+            <rect x="6" y="12" width="12" height="15" rx="3" fill="#d3543a" />
+            <!-- Head & Explorer Hat -->
+            <circle cx="12" cy="7" r="6" fill="#fbd2a4" />
+            <ellipse cx="12" cy="4" rx="10" ry="3" fill="#80562e" />
+            <rect x="9" y="0" width="6" height="4" fill="#5a3b1d" />
+            <!-- Legs -->
+            <rect x="7" y="26" width="4" height="6" fill="#2d587b" />
+            <rect x="13" y="26" width="4" height="6" fill="#2d587b" />
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Warm Translucent Veil Overlay over Background -->
+    <div class="absolute inset-0 bg-[#25170d] bg-opacity-45 backdrop-blur-[3px]"></div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. BACKGROUND HUD ELEMENTS (Virak's World Header & Bottom Dock - Subtly visible) -->
+  <!-- ========================================================================= -->
+  <!-- Top Center Title & Explore pill -->
+  <header class="absolute top-6 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none opacity-40 z-10">
+    <h1 class="font-epilogue font-black text-4xl sm:text-5xl tracking-tight woodcut-title">
+      Virak's World
+    </h1>
+    <div class="mt-2.5 px-4 py-1 rounded-full bg-[#f8ede0]/80 border border-[#dfcaa7] shadow-sm flex items-center gap-1.5 text-xs font-mono font-bold text-[#644222]">
+      <span>Explore World</span>
+      <span class="text-[#d3543a]">â€º</span>
+    </div>
+  </header>
+
+  <!-- Bottom Left WASD + Space Tactile Control Plaque (Subtly visible in background) -->
+  <div class="absolute bottom-6 left-8 z-10 opacity-35 pointer-events-none hidden md:flex flex-col items-center p-3 rounded-2xl bg-[#eee1cf]/80 border-2 border-[#d3be9f] shadow-md">
+    <div class="w-8 h-8 rounded-lg bg-[#faf3e4] border border-[#cbb395] flex items-center justify-center font-mono font-bold text-xs text-timber shadow-sm mb-1.5">W</div>
+    <div class="flex gap-1.5 mb-2">
+      <div class="w-8 h-8 rounded-lg bg-[#faf3e4] border border-[#cbb395] flex items-center justify-center font-mono font-bold text-xs text-timber shadow-sm">A</div>
+      <div class="w-8 h-8 rounded-lg bg-[#faf3e4] border border-[#cbb395] flex items-center justify-center font-mono font-bold text-xs text-timber shadow-sm">S</div>
+      <div class="w-8 h-8 rounded-lg bg-[#faf3e4] border border-[#cbb395] flex items-center justify-center font-mono font-bold text-xs text-timber shadow-sm">D</div>
+    </div>
+    <div class="w-26 px-3 py-1 rounded-md bg-[#faf3e4] border border-[#cbb395] text-[10px] font-mono text-center font-bold text-timber/80 shadow-sm">
+      SPACE JUMP
+    </div>
+  </div>
+
+  <!-- Bottom Center Torn-Paper Landmark Navigation Dock -->
+  <nav class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 opacity-30 pointer-events-none flex items-center gap-3">
+    <div class="px-5 py-2 rounded-xl bg-[#faf3e4] border border-[#dfcbb4] shadow flex items-center gap-2 text-xs font-mono font-bold text-timber">
+      <span class="w-2 h-2 rounded-full bg-[#326e49]"></span>
+      About Me â€º
+    </div>
+    <div class="px-5 py-2 rounded-xl bg-[#faf3e4] border-2 border-[#2d587b] shadow-md flex items-center gap-2 text-xs font-mono font-bold text-slateindigo">
+      <span class="w-2 h-2 rounded-full bg-[#2d587b]"></span>
+      My Work â€º
+    </div>
+    <div class="px-5 py-2 rounded-xl bg-[#faf3e4] border border-[#dfcbb4] shadow flex items-center gap-2 text-xs font-mono font-bold text-timber">
+      <span class="w-2 h-2 rounded-full bg-[#d3543a]"></span>
+      Contact â€º
+    </div>
+  </nav>
+
+  <!-- ========================================================================= -->
+  <!-- 3. FOREGROUND: WORK SHOWCASE MODAL (Center stage, crisp craft perfection) -->
+  <!-- ========================================================================= -->
+  <main class="relative z-30 w-full h-full flex items-center justify-center p-4 sm:p-6 md:p-8">
+
+    <!-- Grand Handcrafted Parchment Modal Box -->
+    <section class="relative w-full max-w-5xl max-h-[92vh] flex flex-col paper-texture rounded-3xl border-2 border-parchment-border shadow-craft overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Top Craft Stitched & Torn Header Bar Accent -->
+      <div class="relative w-full bg-gradient-to-r from-slateindigo via-slateindigo-dark to-[#24425a] px-6 py-2.5 flex items-center justify-between border-b-2 border-[#193042] text-white">
+        <!-- Handcrafted decorative serrated / stitched bar indicator -->
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-white/15 text-[11px] font-mono tracking-widest uppercase font-bold text-[#e1effa] border border-white/20">
+            <svg class="w-3 h-3 text-[#ffc66e]" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2l2.4 5.3 5.6.8-4.1 4 1 5.7-4.9-2.7-4.9 2.7 1-5.7-4.1-4 5.6-.8z"/>
+            </svg>
+            MY WORK // WORKSHOP ARCHIVE
+          </span>
+          <span class="hidden sm:inline text-xs font-mono text-white/60 tracking-wider">
+            ATELIER ISLAND : SECTOR 02
+          </span>
+        </div>
+
+        <!-- Stitched Thread Accent -->
+        <div class="flex items-center gap-4 text-xs font-mono text-[#f3dec2]">
+          <span class="hidden md:inline font-mono opacity-80">LAT 34.02Â° N / ELEV 142m</span>
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="font-bold text-[11px] tracking-wide text-emerald-200">ACTIVE DIORAMA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Modal Inner Wrapper -->
+      <div class="flex-1 overflow-y-auto px-6 py-6 sm:px-8 sm:py-7 flex flex-col justify-between space-y-6">
+
+        <!-- (1) HEADER SECTION -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-5 pb-5 border-b border-parchment-border">
+          <div>
+            <div class="flex items-center gap-3 mb-1.5">
+              <div class="w-7 h-7 rounded-lg bg-terracotta/10 border border-terracotta/30 flex items-center justify-center text-terracotta">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+              </div>
+              <span class="text-xs font-mono font-bold tracking-wider text-slateindigo uppercase">
+                Featured Engineering & Spatial UI
+              </span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-epilogue font-black text-walnut tracking-tight">
+              Selected 3D & Full-Stack Works
+            </h2>
+            <p class="mt-1 text-sm text-timber/80 font-sans max-w-2xl leading-relaxed">
+              Explore custom WebGL architectures, tactile procedural micro-worlds, and production web applications crafted with mathematical precision and handcrafted warmth.
+            </p>
+          </div>
+
+          <!-- Tactile Filter Chips & Tactile [ESC] Keycap Button -->
+          <div class="flex items-center gap-3 self-start md:self-center shrink-0">
+            <!-- Filter Chips (Handcrafted paper badges) -->
+            <div class="inline-flex p-1 rounded-xl bg-parchment-dim border border-parchment-border shadow-inner gap-1">
+              <button class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-[#faf3e4] text-terracotta border border-terracotta/30 shadow-sm transition hover:bg-white">
+                All (03)
+              </button>
+              <button class="px-2.5 py-1.5 rounded-lg text-xs font-mono font-medium text-timber hover:text-walnut hover:bg-[#faf3e4]/60 transition">
+                3D WebGL
+              </button>
+              <button class="hidden lg:inline-block px-2.5 py-1.5 rounded-lg text-xs font-mono font-medium text-timber hover:text-walnut hover:bg-[#faf3e4]/60 transition">
+                Full-Stack
+              </button>
+              <button class="px-2.5 py-1.5 rounded-lg text-xs font-mono font-medium text-timber hover:text-walnut hover:bg-[#faf3e4]/60 transition">
+                Interactive UI
+              </button>
+            </div>
+
+            <!-- Tactile [ESC] Close Button -->
+            <button title="Close Modal (or click backdrop)" class="group flex items-center gap-2 px-3 py-1.5 rounded-xl bg-parchment-key hover:bg-[#fae7ce] active:translate-y-0.5 border border-[#dfc5a6] shadow-keycap transition cursor-pointer">
+              <span class="w-6 h-6 rounded bg-[#fff8ed] border border-[#d6ba99] flex items-center justify-center font-mono font-bold text-[11px] text-walnut shadow-inner group-hover:scale-105 transition-transform">
+                ESC
+              </span>
+              <span class="text-xs font-mono font-bold text-timber pr-1">CLOSE</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- (2) 3-CARD SHOWCASE GRID OF FEATURED PORTFOLIO PROJECTS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+
+          <!-- ================= PROJECT CARD 01 ================= -->
+          <article class="group linen-card rounded-2xl border-2 border-parchment-cardborder hover:border-terracotta/60 shadow-craft-subtle hover:shadow-craft transition-all duration-300 flex flex-col justify-between overflow-hidden">
+            <div>
+              <!-- Card Preview Thumbnail Section -->
+              <div class="relative w-full h-44 bg-gradient-to-tr from-[#3a6142] via-[#528a5e] to-[#7db78c] p-3 flex flex-col justify-between overflow-hidden border-b border-parchment-cardborder">
+                <!-- Mini isometric SVG Preview Graphic -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-85 group-hover:scale-105 transition-transform duration-500">
+                  <svg viewBox="0 0 300 180" class="w-full h-full object-cover">
+                    <ellipse cx="150" cy="115" rx="100" ry="46" fill="#2d4f35" opacity="0.6"/>
+                    <ellipse cx="150" cy="110" rx="95" ry="42" fill="#719d53"/>
+                    <polygon points="120,80 135,50 150,80" fill="#204028"/>
+                    <polygon points="123,65 135,40 147,65" fill="#32633e"/>
+                    <polygon points="160,88 175,55 190,88" fill="#204028"/>
+                    <polygon points="163,72 175,46 187,72" fill="#32633e"/>
+                    <!-- Low-poly house -->
+                    <rect x="135" y="85" width="30" height="22" fill="#e27055"/>
+                    <polygon points="130,85 150,68 170,85" fill="#af3720"/>
+                    <ellipse cx="90" cy="50" rx="35" ry="12" fill="#ffffff" opacity="0.75"/>
+                    <ellipse cx="210" cy="45" rx="30" ry="10" fill="#ffffff" opacity="0.7"/>
+                  </svg>
+                </div>
+
+                <!-- Top Card Indicators -->
+                <div class="relative z-10 flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-walnut/80 backdrop-blur-sm font-mono font-bold text-[11px] text-[#f7e8ce] tracking-wider border border-white/10">
+                    #01 // WEBGL
+                  </span>
+                  <span class="px-2 py-0.5 rounded-full bg-emerald-100/90 text-emerald-900 border border-emerald-300 font-mono font-bold text-[10px] tracking-wide flex items-center gap-1 shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                    LIVE SYSTEM
+                  </span>
+                </div>
+
+                <!-- Bottom Thumbnail Overlay Gradient -->
+                <div class="relative z-10 flex items-center justify-between pt-8 text-[11px] font-mono text-white/90">
+                  <span class="bg-black/40 px-2 py-0.5 rounded backdrop-blur-xs">FPS: 60 locked</span>
+                  <span class="bg-black/40 px-2 py-0.5 rounded backdrop-blur-xs">12.4k Triangles</span>
+                </div>
+              </div>
+
+              <!-- Card Body Content -->
+              <div class="p-5 flex flex-col space-y-3.5">
+                <div>
+                  <span class="text-[11px] font-mono font-bold text-slateindigo tracking-widest uppercase">
+                    Spatial Simulation Engine
+                  </span>
+                  <h3 class="text-xl font-epilogue font-bold text-walnut mt-0.5 group-hover:text-terracotta transition-colors">
+                    Procedural Miniature Biome
+                  </h3>
+                </div>
+
+                <p class="text-xs text-timber/85 font-sans leading-relaxed">
+                  Interactive real-time 3D voxel terrarium running custom vertex shaders for procedural terrain contours, animated foliage physics, and low-poly volumetric cloud lighting.
+                </p>
+
+                <!-- Tech Stack Pills -->
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-slateindigo">
+                    Three.js
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-slateindigo">
+                    GLSL Shaders
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-slateindigo">
+                    TypeScript
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-timber/70">
+                    WebAudio
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Bottom Tactile Torn-Paper Action Buttons -->
+            <div class="px-5 pb-5 pt-2 flex items-center gap-2.5 border-t border-parchment-cardborder/80 bg-parchment/40">
+              <a href="#launch-01" class="flex-1 py-2 px-3 rounded-xl bg-terracotta hover:bg-terracotta-hover active:translate-y-0.5 text-[#fff5ea] text-xs font-mono font-bold shadow-tactile-btn flex items-center justify-center gap-1.5 transition text-center">
+                <span>Launch Demo</span>
+                <span class="text-sm font-black">â€º</span>
+              </a>
+              <a href="#source-01" class="py-2 px-3.5 rounded-xl bg-parchment-accent hover:bg-[#edd8ba] active:translate-y-0.5 text-timber text-xs font-mono font-bold border border-parchment-border shadow-tactile-sec flex items-center justify-center gap-1.5 transition">
+                <svg class="w-3.5 h-3.5 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+                <span>Source</span>
+              </a>
+            </div>
+          </article>
+
+
+          <!-- ================= PROJECT CARD 02 ================= -->
+          <article class="group linen-card rounded-2xl border-2 border-parchment-cardborder hover:border-slateindigo/70 shadow-craft-subtle hover:shadow-craft transition-all duration-300 flex flex-col justify-between overflow-hidden">
+            <div>
+              <!-- Card Preview Thumbnail Section -->
+              <div class="relative w-full h-44 bg-gradient-to-tr from-[#253f58] via-[#2d587b] to-[#4c7b9e] p-3 flex flex-col justify-between overflow-hidden border-b border-parchment-cardborder">
+                <!-- Mini isometric SVG Preview Graphic -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-85 group-hover:scale-105 transition-transform duration-500">
+                  <svg viewBox="0 0 300 180" class="w-full h-full object-cover">
+                    <!-- Compass dial / navigator grid lines -->
+                    <circle cx="150" cy="90" r="65" fill="none" stroke="#6893b8" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+                    <circle cx="150" cy="90" r="45" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4"/>
+                    <!-- Billboards & markers -->
+                    <rect x="90" y="60" width="34" height="20" rx="4" fill="#faf3e4" stroke="#253f58" stroke-width="2"/>
+                    <rect x="175" y="55" width="38" height="20" rx="4" fill="#faf3e4" stroke="#253f58" stroke-width="2"/>
+                    <rect x="135" y="105" width="30" height="18" rx="4" fill="#f5caa4" stroke="#8d4022" stroke-width="2"/>
+                    <!-- Needle -->
+                    <line x1="150" y1="90" x2="185" y2="60" stroke="#df5a40" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="150" cy="90" r="5" fill="#fbf0d8"/>
+                  </svg>
+                </div>
+
+                <!-- Top Card Indicators -->
+                <div class="relative z-10 flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-walnut/80 backdrop-blur-sm font-mono font-bold text-[11px] text-[#f7e8ce] tracking-wider border border-white/10">
+                    #02 // FRAMEWORK
+                  </span>
+                  <span class="px-2 py-0.5 rounded-full bg-blue-100/90 text-blue-900 border border-blue-300 font-mono font-bold text-[10px] tracking-wide flex items-center gap-1 shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                    OPEN SOURCE
+                  </span>
+                </div>
+
+                <!-- Bottom Thumbnail Overlay Gradient -->
+                <div class="relative z-10 flex items-center justify-between pt-8 text-[11px] font-mono text-white/90">
+                  <span class="bg-black/40 px-2 py-0.5 rounded backdrop-blur-xs">R3F + Canvas2D</span>
+                  <span class="bg-black/40 px-2 py-0.5 rounded backdrop-blur-xs">v2.4.0 Stable</span>
+                </div>
+              </div>
+
+              <!-- Card Body Content -->
+              <div class="p-5 flex flex-col space-y-3.5">
+                <div>
+                  <span class="text-[11px] font-mono font-bold text-terracotta tracking-widest uppercase">
+                    Spatial Navigation Framework
+                  </span>
+                  <h3 class="text-xl font-epilogue font-bold text-walnut mt-0.5 group-hover:text-slateindigo transition-colors">
+                    Tactile Portfolio Navigator
+                  </h3>
+                </div>
+
+                <p class="text-xs text-timber/85 font-sans leading-relaxed">
+                  A reusable spatial portfolio architecture calculating 3D Euclidean distances, billboard camera projections, smooth spring physics interpolation, and tactile HUD inputs.
+                </p>
+
+                <!-- Tech Stack Pills -->
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-slateindigo">
+                    React Three Fiber
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-slateindigo">
+                    Next.js 14
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-slateindigo">
+                    Tailwind CSS
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-timber/70">
+                    Zustand
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Bottom Tactile Torn-Paper Action Buttons -->
+            <div class="px-5 pb-5 pt-2 flex items-center gap-2.5 border-t border-parchment-cardborder/80 bg-parchment/40">
+              <a href="#launch-02" class="flex-1 py-2 px-3 rounded-xl bg-terracotta hover:bg-terracotta-hover active:translate-y-0.5 text-[#fff5ea] text-xs font-mono font-bold shadow-tactile-btn flex items-center justify-center gap-1.5 transition text-center">
+                <span>Launch Demo</span>
+                <span class="text-sm font-black">â€º</span>
+              </a>
+              <a href="#source-02" class="py-2 px-3.5 rounded-xl bg-parchment-accent hover:bg-[#edd8ba] active:translate-y-0.5 text-timber text-xs font-mono font-bold border border-parchment-border shadow-tactile-sec flex items-center justify-center gap-1.5 transition">
+                <svg class="w-3.5 h-3.5 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+                <span>Source</span>
+              </a>
+            </div>
+          </article>
+
+
+          <!-- ================= PROJECT CARD 03 ================= -->
+          <article class="group linen-card rounded-2xl border-2 border-parchment-cardborder hover:border-amber-600/60 shadow-craft-subtle hover:shadow-craft transition-all duration-300 flex flex-col justify-between overflow-hidden">
+            <div>
+              <!-- Card Preview Thumbnail Section -->
+              <div class="relative w-full h-44 bg-gradient-to-tr from-[#543b22] via-[#85572c] to-[#b37a43] p-3 flex flex-col justify-between overflow-hidden border-b border-parchment-cardborder">
+                <!-- Mini isometric SVG Preview Graphic -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-85 group-hover:scale-105 transition-transform duration-500">
+                  <svg viewBox="0 0 300 180" class="w-full h-full object-cover">
+                    <!-- Miniature telegraph / signal wave lattice -->
+                    <rect x="50" y="40" width="200" height="100" rx="6" fill="#2d1c0e" opacity="0.6"/>
+                    <path d="M 60 90 Q 90 40 120 90 T 180 90 T 240 90" fill="none" stroke="#f6c278" stroke-width="2.5"/>
+                    <path d="M 60 90 Q 90 120 120 90 T 180 90 T 240 90" fill="none" stroke="#e07248" stroke-width="1.5" stroke-dasharray="3 3"/>
+                    <circle cx="120" cy="90" r="5" fill="#ffffff"/>
+                    <circle cx="180" cy="90" r="5" fill="#ffffff"/>
+                    <rect x="135" y="115" width="30" height="14" rx="3" fill="#faf3e4"/>
+                  </svg>
+                </div>
+
+                <!-- Top Card Indicators -->
+                <div class="relative z-10 flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-walnut/80 backdrop-blur-sm font-mono font-bold text-[11px] text-[#f7e8ce] tracking-wider border border-white/10">
+                    #03 // PROTOCOL
+                  </span>
+                  <span class="px-2 py-0.5 rounded-full bg-amber-100/90 text-amber-900 border border-amber-300 font-mono font-bold text-[10px] tracking-wide flex items-center gap-1 shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                    EXPERIMENT
+                  </span>
+                </div>
+
+                <!-- Bottom Thumbnail Overlay Gradient -->
+                <div class="relative z-10 flex items-center justify-between pt-8 text-[11px] font-mono text-white/90">
+                  <span class="bg-black/40 px-2 py-0.5 rounded backdrop-blur-xs">WebSockets / RPC</span>
+                  <span class="bg-black/40 px-2 py-0.5 rounded backdrop-blur-xs">&lt; 18ms Latency</span>
+                </div>
+              </div>
+
+              <!-- Card Body Content -->
+              <div class="p-5 flex flex-col space-y-3.5">
+                <div>
+                  <span class="text-[11px] font-mono font-bold text-sage tracking-widest uppercase">
+                    Realtime Telemetry & Audio
+                  </span>
+                  <h3 class="text-xl font-epilogue font-bold text-walnut mt-0.5 group-hover:text-terracotta transition-colors">
+                    Telegraph Audio Synthesizer
+                  </h3>
+                </div>
+
+                <p class="text-xs text-timber/85 font-sans leading-relaxed">
+                  Interactive Morse telegraph and FM audio synthesizer featuring tactile keying, real-time node relay over WebSockets, and retro visual frequency oscilloscopes.
+                </p>
+
+                <!-- Tech Stack Pills -->
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-slateindigo">
+                    Web Audio API
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-slateindigo">
+                    WebSockets
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-slateindigo">
+                    Canvas 2D
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-parchment border border-parchment-border text-[11px] font-mono font-bold text-timber/70">
+                    Node.js
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Bottom Tactile Torn-Paper Action Buttons -->
+            <div class="px-5 pb-5 pt-2 flex items-center gap-2.5 border-t border-parchment-cardborder/80 bg-parchment/40">
+              <a href="#launch-03" class="flex-1 py-2 px-3 rounded-xl bg-terracotta hover:bg-terracotta-hover active:translate-y-0.5 text-[#fff5ea] text-xs font-mono font-bold shadow-tactile-btn flex items-center justify-center gap-1.5 transition text-center">
+                <span>Launch Demo</span>
+                <span class="text-sm font-black">â€º</span>
+              </a>
+              <a href="#source-03" class="py-2 px-3.5 rounded-xl bg-parchment-accent hover:bg-[#edd8ba] active:translate-y-0.5 text-timber text-xs font-mono font-bold border border-parchment-border shadow-tactile-sec flex items-center justify-center gap-1.5 transition">
+                <svg class="w-3.5 h-3.5 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+                <span>Source</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- FOOTER BAR INSIDE MODAL (Torn paper note & navigation instructions) -->
+        <footer class="pt-4 border-t border-parchment-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-timber/75">
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-2.5 h-2.5 rounded-sm bg-terracotta rotate-45"></span>
+            <span>Crafted by Virak â€¢ Procedural WebGL & Tactile Engineering</span>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1.5">
+              <kbd class="px-1.5 py-0.5 rounded bg-parchment-key border border-[#d6ba99] text-[10px] font-bold text-walnut shadow-sm">WASD</kbd>
+              <span>to resume island roaming</span>
+            </span>
+            <span class="text-parchment-border">â€¢</span>
+            <a href="#contact" class="text-terracotta hover:underline font-bold">
+              Dispatch Signal (Contact) â€º
+            </a>
+          </div>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

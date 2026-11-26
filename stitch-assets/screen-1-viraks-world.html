@@ -1,0 +1,758 @@
+﻿<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Epilogue:ital,wght@0,100..900;1,100..900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>
+@layer base{html,body{margin:0;padding:0;width:100%;height:100%;}body{overscroll-behavior:none;}}
+::-webkit-scrollbar{display:none;}
+.craft-shadow {
+  box-shadow: 0 4px 14px -1px rgba(92, 58, 38, 0.22), 0 2px 5px -1px rgba(92, 58, 38, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+.craft-shadow-pressed:active {
+  box-shadow: 0 1px 3px rgba(92, 58, 38, 0.2), inset 0 2px 4px rgba(92, 58, 38, 0.12);
+  transform: translateY(2px) scale(0.98);
+}
+.torn-paper {
+  clip-path: polygon(
+    0% 4px, 4px 0%, calc(100% - 4px) 0%, 100% 4px,
+    99% calc(50% - 2px), 100% 50%, 99% calc(50% + 2px),
+    100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px),
+    1% calc(50% + 2px), 0% 50%, 1% calc(50% - 2px)
+  );
+}
+.title-stroke {
+  color: #fff9ee;
+  text-shadow: 
+    0 2px 0 #caa36d,
+    0 3px 0 #a97e47,
+    0 4px 8px rgba(74, 46, 22, 0.35),
+    0 0 1px rgba(110, 72, 36, 0.8);
+}
+.wasd-badge {
+  background-color: #faedd8;
+  border: 1.5px solid #cbb395;
+  box-shadow: 0 4px 12px rgba(88, 56, 33, 0.2), 0 2px 4px rgba(88, 56, 33, 0.12), inset 0 1px 0 #fffdf9;
+}
+.wasd-key {
+  background-color: #f3dec2;
+  color: #2c221e;
+  border: 1px solid #d4bea0;
+  box-shadow: 0 2px 0 #bfa585, 0 3px 4px rgba(80, 50, 30, 0.15), inset 0 1px 0 #fff8ee;
+}
+</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-low": "#fbf2ed", "surface-container-highest": "#eae1dc", "primary-container": "#c84c33", "secondary-fixed-dim": "#aacfbd", "surface-tint": "#aa361f", "tertiary-fixed-dim": "#96cfe4", "on-error-container": "#93000a", "error": "#ba1a1a", "on-surface-variant": "#58413d", "surface-bright": "#fff8f5", "surface-container": "#f5ece7", "on-tertiary-fixed": "#001f28", "secondary": "#446557", "inverse-surface": "#34302c", "surface-variant": "#eae1dc", "primary": "#a6341d", "on-surface": "#1f1b18", "on-error": "#ffffff", "tertiary-fixed": "#b5ebff", "secondary-fixed": "#c6ebd9", "primary-fixed": "#ffdad3", "tertiary-container": "#437c8f", "inverse-on-surface": "#f8efea", "on-background": "#1f1b18", "background": "#fff8f5", "on-secondary-fixed": "#002116", "on-secondary-fixed-variant": "#2c4d40", "on-secondary": "#ffffff", "surface": "#fff8f5", "outline": "#8c716b", "on-primary": "#ffffff", "surface-container-high": "#f0e6e1", "primary-fixed-dim": "#ffb4a4", "surface-dim": "#e1d8d3", "on-tertiary": "#ffffff", "inverse-primary": "#ffb4a4", "on-primary-container": "#fffbff", "secondary-container": "#c3e8d6", "on-primary-fixed": "#3e0500", "on-primary-fixed-variant": "#881e09", "on-tertiary-container": "#fafdff", "error-container": "#ffdad6", "surface-container-lowest": "#ffffff", "tertiary": "#276375", "outline-variant": "#dfbfb9", "on-tertiary-fixed-variant": "#064d5f", "on-secondary-container": "#48695b" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "margin-mobile": "1rem", "space-sm": "0.5rem", "gutter": "1rem", "space-xl": "2.5rem", "space-xs": "0.25rem", "gutter-mobile": "0.75rem", "space-lg": "1.5rem", "margin": "2rem" }, "fontFamily": { "headline-md": ["Epilogue"], "headline-lg": ["Epilogue"], "body-lg": ["DM Sans"], "label-keycap": ["Space Mono"], "badge": ["DM Sans"], "body-sm": ["DM Sans"], "display": ["Epilogue"], "label-hud": ["Space Mono"], "headline-lg-mobile": ["Epilogue"], "body-md": ["DM Sans"], "headline-sm": ["Epilogue"], "display-mobile": ["Epilogue"] }, "fontSize": { "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400"}], "label-keycap": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "700"}], "badge": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700"}], "body-sm": ["13px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}], "display": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "800"}], "label-hud": ["11px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700"}], "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700"}], "body-md": ["15px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}], "headline-sm": ["18px", {"lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "600"}], "display-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800"}] } } } };</script></head><body class="bg-[#dceef5] font-body-md text-on-surface antialiased w-screen h-screen relative selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden select-none"><!-- STITCH_THREEJS_START:ANIMATION_20 class="fixed inset-0 w-full h-full bg-transparent -z-0" -->
+<div class="fixed inset-0 w-full h-full bg-transparent -z-0" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_20" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_20');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  // Dynamic 3D Miniature Terrarium Diorama with Floating Distance Markers for "My Work" and "Contact"
+const containerElement = container || document.body;
+const width = containerElement.clientWidth || window.innerWidth;
+const height = containerElement.clientHeight || window.innerHeight;
+
+// Scene setup
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xdceef5); // Soft serene sky blue mist
+scene.fog = new THREE.FogExp2(0xdceef5, 0.009);
+
+// Camera
+const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+camera.position.set(0, 24, 38);
+
+// Renderer
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+containerElement.appendChild(renderer.domElement);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xfff6ec, 0.95);
+scene.add(ambientLight);
+
+const sunLight = new THREE.DirectionalLight(0xfffaee, 1.35);
+sunLight.position.set(24, 42, 22);
+sunLight.castShadow = true;
+sunLight.shadow.mapSize.width = 2048;
+sunLight.shadow.mapSize.height = 2048;
+sunLight.shadow.camera.near = 0.5;
+sunLight.shadow.camera.far = 110;
+const d = 34;
+sunLight.shadow.camera.left = -d;
+sunLight.shadow.camera.right = d;
+sunLight.shadow.camera.top = d;
+sunLight.shadow.camera.bottom = -d;
+sunLight.shadow.bias = -0.0004;
+scene.add(sunLight);
+
+const fillLight = new THREE.DirectionalLight(0xb5daf5, 0.45);
+fillLight.position.set(-20, 18, -20);
+scene.add(fillLight);
+
+// WORLD ISLAND (Terrarium Expansive Floating Diorama)
+const worldGroup = new THREE.Group();
+scene.add(worldGroup);
+
+// Expanded floating island base (radius 22)
+const islandRadius = 22.0;
+const islandGeom = new THREE.CylinderGeometry(islandRadius, islandRadius - 2.8, 4.2, 64);
+const islandMat = new THREE.MeshLambertMaterial({ color: 0x82b956 }); // Peaceful stylized green
+const cliffMat = new THREE.MeshLambertMaterial({ color: 0x7c5438 });  // Warm earthy bedrock
+const islandMesh = new THREE.Mesh(islandGeom, [islandMat, cliffMat, cliffMat]);
+islandMesh.position.y = -2.1;
+islandMesh.receiveShadow = true;
+worldGroup.add(islandMesh);
+
+// Floating dirt underside rim rocks
+for (let i = 0; i < 16; i++) {
+  const angle = (i / 16) * Math.PI * 2;
+  const rad = islandRadius - 1.2 + Math.random() * 0.8;
+  const rockGeom = new THREE.DodecahedronGeometry(1.2 + Math.random() * 0.7, 0);
+  const rockMat = new THREE.MeshLambertMaterial({ color: 0x6e492e });
+  const rock = new THREE.Mesh(rockGeom, rockMat);
+  rock.position.set(Math.cos(angle) * rad, -2.6 - Math.random() * 1.5, Math.sin(angle) * rad);
+  rock.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+  worldGroup.add(rock);
+}
+
+// Interconnected Cobblestone Pathways connecting the three landmark stores
+function createCobblestonePath(points, count = 18) {
+  const curve = new THREE.CatmullRomCurve3(points);
+  const pts = curve.getPoints(count);
+  pts.forEach((pt, i) => {
+    const stoneW = 1.0 + Math.sin(i * 0.8) * 0.25;
+    const stoneL = 0.85 + Math.cos(i * 0.5) * 0.2;
+    const stoneGeom = new THREE.BoxGeometry(stoneW, 0.08, stoneL);
+    const stoneColor = (i % 2 === 0) ? 0xede2d2 : 0xe2d6c3;
+    const stoneMat = new THREE.MeshLambertMaterial({ color: stoneColor });
+    const stone = new THREE.Mesh(stoneGeom, stoneMat);
+    stone.position.set(pt.x, 0.04, pt.z);
+    stone.rotation.y = (i * 0.15);
+    stone.receiveShadow = true;
+    worldGroup.add(stone);
+  });
+}
+
+createCobblestonePath([
+  new THREE.Vector3(0, 0.02, 6.0),
+  new THREE.Vector3(0, 0.02, 1.5),
+  new THREE.Vector3(0, 0.02, -2.0)
+], 12);
+
+createCobblestonePath([
+  new THREE.Vector3(0, 0.02, 1.5),
+  new THREE.Vector3(5.5, 0.02, 0.5),
+  new THREE.Vector3(11.0, 0.02, -1.5)
+], 14);
+
+createCobblestonePath([
+  new THREE.Vector3(0, 0.02, 1.5),
+  new THREE.Vector3(-5.5, 0.02, 0.5),
+  new THREE.Vector3(-11.0, 0.02, -1.5)
+], 14);
+
+createCobblestonePath([
+  new THREE.Vector3(0, 0.02, 6.0),
+  new THREE.Vector3(1.5, 0.02, 9.5),
+  new THREE.Vector3(3.0, 0.02, 12.5)
+], 12);
+
+// TALL DETAILED CONIFER PINE TREES
+function createDetailedTallTree(x, z, scale = 1.0) {
+  const tree = new THREE.Group();
+  
+  const trunkGeom = new THREE.CylinderGeometry(0.24 * scale, 0.36 * scale, 2.2 * scale, 8);
+  const trunkMat = new THREE.MeshLambertMaterial({ color: 0x543621 });
+  const trunk = new THREE.Mesh(trunkGeom, trunkMat);
+  trunk.position.y = 1.1 * scale;
+  trunk.castShadow = true;
+  tree.add(trunk);
+
+  const foliageTints = [0x285632, 0x33683e, 0x3d7b4a, 0x4e8d5b];
+  const layerCount = 4;
+  for (let l = 0; l < layerCount; l++) {
+    const bottomRadius = (2.2 - l * 0.38) * scale;
+    const height = (1.9 - l * 0.2) * scale;
+    const fGeom = new THREE.ConeGeometry(bottomRadius, height, 7);
+    const fMat = new THREE.MeshLambertMaterial({ color: foliageTints[l] });
+    const fMesh = new THREE.Mesh(fGeom, fMat);
+    fMesh.position.y = (1.8 + l * 1.15) * scale;
+    fMesh.castShadow = true;
+    fMesh.receiveShadow = true;
+    tree.add(fMesh);
+  }
+
+  tree.position.set(x, 0, z);
+  return tree;
+}
+
+const detailedTreeCoords = [
+  [-17.5, -4.5, 1.35], [-16.0, 3.0, 1.2], [-14.5, 7.5, 1.1], [-18.0, 0.5, 1.4],
+  [-15.0, -9.0, 1.25], [-12.5, -13.5, 1.3], [-8.5, -15.0, 1.15],
+  [17.5, -4.0, 1.35], [16.5, 3.5, 1.25], [15.0, 8.0, 1.15], [18.2, 1.0, 1.4],
+  [15.5, -9.5, 1.2], [12.8, -13.0, 1.3], [8.0, -15.5, 1.1],
+  [-4.0, -16.5, 1.4], [0.0, -17.5, 1.5], [4.5, -16.5, 1.35],
+  [-6.5, -12.0, 1.1], [6.5, -11.5, 1.05],
+  [-11.0, 12.0, 1.2], [-7.5, 15.0, 1.15], [-3.5, 16.5, 1.05],
+  [8.0, 14.5, 1.15], [12.0, 11.5, 1.2], [14.0, 8.5, 1.05],
+  [-7.0, -4.0, 0.95], [7.0, -3.5, 0.95], [5.0, 5.5, 0.85]
+];
+
+detailedTreeCoords.forEach(([x, z, s]) => {
+  worldGroup.add(createDetailedTallTree(x, z, s));
+});
+
+// 1. Central Atelier Pavilion (Main Hub)
+function createCentralHub() {
+  const hub = new THREE.Group();
+  
+  const baseGeom = new THREE.BoxGeometry(4.4, 3.2, 3.8);
+  const baseMat = new THREE.MeshLambertMaterial({ color: 0xc8533d });
+  const base = new THREE.Mesh(baseGeom, baseMat);
+  base.position.y = 1.6;
+  base.castShadow = true;
+  base.receiveShadow = true;
+  hub.add(base);
+
+  const roofGeom = new THREE.ConeGeometry(3.7, 2.2, 4);
+  const roofMat = new THREE.MeshLambertMaterial({ color: 0x38271e });
+  const roof = new THREE.Mesh(roofGeom, roofMat);
+  roof.position.y = 4.3;
+  roof.rotation.y = Math.PI / 4;
+  roof.castShadow = true;
+  hub.add(roof);
+
+  const awningGeom = new THREE.BoxGeometry(2.4, 0.15, 1.2);
+  const awningMat = new THREE.MeshLambertMaterial({ color: 0xf1dfc8 });
+  const awning = new THREE.Mesh(awningGeom, awningMat);
+  awning.position.set(0, 2.2, 2.3);
+  awning.castShadow = true;
+  hub.add(awning);
+
+  const doorGeom = new THREE.BoxGeometry(1.0, 1.8, 0.1);
+  const doorMat = new THREE.MeshLambertMaterial({ color: 0x221712 });
+  const door = new THREE.Mesh(doorGeom, doorMat);
+  door.position.set(0, 0.9, 1.92);
+  hub.add(door);
+
+  const chimGeom = new THREE.BoxGeometry(0.6, 1.6, 0.6);
+  const chimMat = new THREE.MeshLambertMaterial({ color: 0x6e6561 });
+  const chim = new THREE.Mesh(chimGeom, chimMat);
+  chim.position.set(1.3, 4.4, -0.6);
+  chim.castShadow = true;
+  hub.add(chim);
+
+  return hub;
+}
+const centralHub = createCentralHub();
+centralHub.position.set(0, 0, -4.0);
+worldGroup.add(centralHub);
+
+// Landmark Houses:
+// A. "About Me" Store / Archive Library (Left / West side) - Clean without distance marker
+function createAboutStore() {
+  const store = new THREE.Group();
+  
+  const baseGeom = new THREE.BoxGeometry(3.6, 2.8, 3.4);
+  const baseMat = new THREE.MeshLambertMaterial({ color: 0x486b51 });
+  const base = new THREE.Mesh(baseGeom, baseMat);
+  base.position.y = 1.4;
+  base.castShadow = true;
+  base.receiveShadow = true;
+  store.add(base);
+
+  const roofGeom = new THREE.ConeGeometry(3.2, 1.8, 4);
+  const roofMat = new THREE.MeshLambertMaterial({ color: 0x273b2c });
+  const roof = new THREE.Mesh(roofGeom, roofMat);
+  roof.position.y = 3.65;
+  roof.rotation.y = Math.PI / 4;
+  roof.castShadow = true;
+  store.add(roof);
+
+  const signGeom = new THREE.BoxGeometry(1.8, 0.6, 0.15);
+  const signMat = new THREE.MeshLambertMaterial({ color: 0xf6ebd9 });
+  const sign = new THREE.Mesh(signGeom, signMat);
+  sign.position.set(0, 2.7, 1.78);
+  sign.castShadow = true;
+  store.add(sign);
+
+  const winGeom = new THREE.BoxGeometry(1.0, 1.0, 0.1);
+  const winMat = new THREE.MeshBasicMaterial({ color: 0xffea9f });
+  const win = new THREE.Mesh(winGeom, winMat);
+  win.position.set(0.9, 1.3, 1.72);
+  store.add(win);
+
+  const doorGeom = new THREE.BoxGeometry(0.8, 1.5, 0.1);
+  const doorMat = new THREE.MeshLambertMaterial({ color: 0x221712 });
+  const door = new THREE.Mesh(doorGeom, doorMat);
+  door.position.set(-0.7, 0.75, 1.72);
+  store.add(door);
+
+  return store;
+}
+const aboutStore = createAboutStore();
+aboutStore.position.set(-11.5, 0, -2.5);
+aboutStore.rotation.y = 0.35;
+worldGroup.add(aboutStore);
+
+// B. "Projects" / "My Work" Gallery Workshop (Right / East side)
+function createProjectsStore() {
+  const store = new THREE.Group();
+  
+  const baseGeom = new THREE.BoxGeometry(4.0, 2.9, 3.5);
+  const baseMat = new THREE.MeshLambertMaterial({ color: 0x3d668c });
+  const base = new THREE.Mesh(baseGeom, baseMat);
+  base.position.y = 1.45;
+  base.castShadow = true;
+  base.receiveShadow = true;
+  store.add(base);
+
+  const roofGeom = new THREE.ConeGeometry(3.4, 2.0, 4);
+  const roofMat = new THREE.MeshLambertMaterial({ color: 0x1f3448 });
+  const roof = new THREE.Mesh(roofGeom, roofMat);
+  roof.position.y = 3.85;
+  roof.rotation.y = Math.PI / 4;
+  roof.castShadow = true;
+  store.add(roof);
+
+  const winGeom = new THREE.BoxGeometry(1.6, 1.2, 0.1);
+  const winMat = new THREE.MeshBasicMaterial({ color: 0xffefb8 });
+  const win = new THREE.Mesh(winGeom, winMat);
+  win.position.set(-0.8, 1.35, 1.78);
+  store.add(win);
+
+  const doorGeom = new THREE.BoxGeometry(1.1, 1.7, 0.1);
+  const doorMat = new THREE.MeshLambertMaterial({ color: 0x181f26 });
+  const door = new THREE.Mesh(doorGeom, doorMat);
+  door.position.set(0.9, 0.85, 1.78);
+  store.add(door);
+
+  const signGeom = new THREE.BoxGeometry(1.9, 0.6, 0.15);
+  const signMat = new THREE.MeshLambertMaterial({ color: 0xf5edd6 });
+  const sign = new THREE.Mesh(signGeom, signMat);
+  sign.position.set(0, 2.8, 1.82);
+  sign.castShadow = true;
+  store.add(sign);
+
+  return store;
+}
+const projectsStore = createProjectsStore();
+projectsStore.position.set(11.5, 0, -2.5);
+projectsStore.rotation.y = -0.35;
+worldGroup.add(projectsStore);
+
+// C. "Contact" Telegraph Outpost / Beacon Store (Front-Right / South side)
+function createContactStore() {
+  const store = new THREE.Group();
+  
+  const baseGeom = new THREE.BoxGeometry(3.2, 2.6, 3.0);
+  const baseMat = new THREE.MeshLambertMaterial({ color: 0xd97736 });
+  const base = new THREE.Mesh(baseGeom, baseMat);
+  base.position.y = 1.3;
+  base.castShadow = true;
+  base.receiveShadow = true;
+  store.add(base);
+
+  const roofGeom = new THREE.ConeGeometry(2.8, 2.2, 4);
+  const roofMat = new THREE.MeshLambertMaterial({ color: 0x3d2719 });
+  const roof = new THREE.Mesh(roofGeom, roofMat);
+  roof.position.y = 3.65;
+  roof.rotation.y = Math.PI / 4;
+  roof.castShadow = true;
+  store.add(roof);
+
+  const spireGeom = new THREE.CylinderGeometry(0.06, 0.1, 1.8, 6);
+  const spireMat = new THREE.MeshLambertMaterial({ color: 0x8a7b73 });
+  const spire = new THREE.Mesh(spireGeom, spireMat);
+  spire.position.set(0, 4.8, 0);
+  store.add(spire);
+
+  const doorGeom = new THREE.BoxGeometry(0.85, 1.5, 0.1);
+  const doorMat = new THREE.MeshLambertMaterial({ color: 0x221712 });
+  const door = new THREE.Mesh(doorGeom, doorMat);
+  door.position.set(0, 0.75, 1.52);
+  store.add(door);
+
+  return store;
+}
+const contactStore = createContactStore();
+contactStore.position.set(3.5, 0, 12.8);
+contactStore.rotation.y = -Math.PI * 0.85;
+worldGroup.add(contactStore);
+
+// DYNAMIC FLOATING DISTANCE MARKERS (For "My Work" and "Contact" landmark houses)
+function createDistanceMarker(title, tagColor, initialDist = '15.0m') {
+  const markerGroup = new THREE.Group();
+
+  // Create canvas texture
+  const canvas = document.createElement('canvas');
+  canvas.width = 384;
+  canvas.height = 144;
+  const ctx = canvas.getContext('2d');
+
+  function renderMarkerContent(distText) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Warm Parchment Pill Background with subtle border
+    ctx.fillStyle = '#f7eedf';
+    ctx.beginPath();
+    ctx.roundRect(16, 12, 352, 100, 24);
+    ctx.fill();
+
+    // Subtle kraft border
+    ctx.strokeStyle = '#dfcbb4';
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    // Top Category / Title
+    ctx.fillStyle = tagColor;
+    ctx.font = 'bold 24px Epilogue, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(title.toUpperCase(), 192, 48);
+
+    // Distance Value
+    ctx.fillStyle = '#2c221e';
+    ctx.font = 'bold 36px Epilogue, monospace, sans-serif';
+    ctx.fillText(distText, 192, 92);
+
+    // Downward pointer arrow notch
+    ctx.fillStyle = '#f7eedf';
+    ctx.beginPath();
+    ctx.moveTo(174, 112);
+    ctx.lineTo(210, 112);
+    ctx.lineTo(192, 132);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = '#dfcbb4';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+
+  renderMarkerContent(initialDist);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.minFilter = THREE.LinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+
+  // Use a Sprite so it always billboard-faces the camera seamlessly
+  const spriteMat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });
+  const sprite = new THREE.Sprite(spriteMat);
+  sprite.scale.set(4.8, 1.8, 1);
+  markerGroup.add(sprite);
+
+  // Little low-poly diamond anchor pin below the sprite
+  const pinGeom = new THREE.OctahedronGeometry(0.24, 0);
+  const pinMat = new THREE.MeshLambertMaterial({ color: 0xd3543a });
+  const pin = new THREE.Mesh(pinGeom, pinMat);
+  pin.position.y = -1.1;
+  markerGroup.add(pin);
+
+  markerGroup.userData = {
+    canvas,
+    ctx,
+    texture,
+    renderMarkerContent,
+    lastDistance: null
+  };
+
+  return markerGroup;
+}
+
+// Markers placed above "My Work" and "Contact"
+const activeDistanceMarkers = [
+  {
+    name: 'My Work',
+    color: '#2d587b', // Slate indigo blue
+    pos: new THREE.Vector3(11.5, 7.0, -2.5),
+    worldPos: new THREE.Vector3(11.5, 0, -2.5)
+  },
+  {
+    name: 'Contact',
+    color: '#c45e22', // Amber terracotta
+    pos: new THREE.Vector3(3.5, 7.4, 12.8),
+    worldPos: new THREE.Vector3(3.5, 0, 12.8)
+  }
+];
+
+activeDistanceMarkers.forEach((lm) => {
+  const marker = createDistanceMarker(lm.name, lm.color, '0.0m');
+  marker.position.copy(lm.pos);
+  lm.markerMesh = marker;
+  worldGroup.add(marker);
+});
+
+// FLUFFY FLOATING CLOUDS
+const cloudsGroup = new THREE.Group();
+const cloudPuffMat = new THREE.MeshLambertMaterial({ color: 0xffffff, transparent: true, opacity: 0.92 });
+
+function createFluffyCloud(scale = 1.0) {
+  const cloud = new THREE.Group();
+  const puffCount = 5 + Math.floor(Math.random() * 3);
+  for (let p = 0; p < puffCount; p++) {
+    const r = (1.4 + Math.random() * 0.9) * scale;
+    const puff = new THREE.Mesh(new THREE.DodecahedronGeometry(r, 1), cloudPuffMat);
+    puff.position.set(
+      (p - puffCount / 2) * 1.5 * scale,
+      Math.sin(p * 1.2) * 0.45 * scale,
+      (Math.random() - 0.5) * 1.2 * scale
+    );
+    puff.castShadow = true;
+    cloud.add(puff);
+  }
+  return cloud;
+}
+
+const cloudConfigs = [
+  { x: -28, y: 15, z: -15, s: 1.25, speed: 0.007 },
+  { x: 26, y: 17, z: -18, s: 1.4, speed: 0.009 },
+  { x: 30, y: 13, z: 12, s: 1.1, speed: 0.006 },
+  { x: -26, y: 18, z: 16, s: 1.35, speed: 0.008 },
+  { x: 0, y: 21, z: -29, s: 1.5, speed: 0.005 },
+  { x: -16, y: 14, z: 27, s: 1.15, speed: 0.0075 },
+  { x: 20, y: 19, z: 25, s: 1.2, speed: 0.0065 }
+];
+
+cloudConfigs.forEach((cfg) => {
+  const cloud = createFluffyCloud(cfg.s);
+  cloud.position.set(cfg.x, cfg.y, cfg.z);
+  cloud.userData = { speed: cfg.speed, baseY: cfg.y };
+  cloudsGroup.add(cloud);
+});
+scene.add(cloudsGroup);
+
+// Playable Character
+const character = new THREE.Group();
+character.position.set(0, 0, 5.5);
+worldGroup.add(character);
+
+const bodyGeom = new THREE.BoxGeometry(0.85, 0.95, 0.55);
+const bodyMat = new THREE.MeshLambertMaterial({ color: 0xd3543a });
+const charBody = new THREE.Mesh(bodyGeom, bodyMat);
+charBody.position.y = 0.95;
+charBody.castShadow = true;
+character.add(charBody);
+
+const headGeom = new THREE.BoxGeometry(0.66, 0.66, 0.66);
+const headMat = new THREE.MeshLambertMaterial({ color: 0xffdfbe });
+const charHead = new THREE.Mesh(headGeom, headMat);
+charHead.position.y = 1.8;
+charHead.castShadow = true;
+character.add(charHead);
+
+const hatGeom = new THREE.ConeGeometry(0.6, 0.55, 6);
+const hatMat = new THREE.MeshLambertMaterial({ color: 0x394f3e });
+const hat = new THREE.Mesh(hatGeom, hatMat);
+hat.position.y = 2.35;
+hat.rotation.y = Math.PI / 6;
+character.add(hat);
+
+const legGeom = new THREE.BoxGeometry(0.28, 0.56, 0.28);
+const legMat = new THREE.MeshLambertMaterial({ color: 0x242d38 });
+
+const leftLeg = new THREE.Mesh(legGeom, legMat);
+leftLeg.position.set(-0.24, 0.28, 0);
+leftLeg.castShadow = true;
+character.add(leftLeg);
+
+const rightLeg = new THREE.Mesh(legGeom, legMat);
+rightLeg.position.set(0.24, 0.28, 0);
+rightLeg.castShadow = true;
+character.add(rightLeg);
+
+const armGeom = new THREE.BoxGeometry(0.2, 0.62, 0.2);
+const armMat = new THREE.MeshLambertMaterial({ color: 0xd3543a });
+
+const leftArm = new THREE.Mesh(armGeom, armMat);
+leftArm.position.set(-0.52, 0.9, 0);
+leftArm.castShadow = true;
+character.add(leftArm);
+
+const rightArm = new THREE.Mesh(armGeom, armMat);
+rightArm.position.set(0.52, 0.9, 0);
+rightArm.castShadow = true;
+character.add(rightArm);
+
+// Movement & Interaction
+const keys = { w: false, a: false, s: false, d: false, ArrowUp: false, ArrowLeft: false, ArrowDown: false, ArrowRight: false };
+let targetPosition = null;
+const moveSpeed = 6.4;
+const rotateSpeed = 8.5;
+let walkCycle = 0;
+let isMoving = false;
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+window.addEventListener('keydown', (e) => {
+  if (keys.hasOwnProperty(e.key.toLowerCase())) {
+    keys[e.key.toLowerCase()] = true;
+    targetPosition = null;
+  }
+  if (keys.hasOwnProperty(e.key)) {
+    keys[e.key] = true;
+    targetPosition = null;
+  }
+});
+
+window.addEventListener('keyup', (e) => {
+  if (keys.hasOwnProperty(e.key.toLowerCase())) {
+    keys[e.key.toLowerCase()] = false;
+  }
+  if (keys.hasOwnProperty(e.key)) {
+    keys[e.key] = false;
+  }
+});
+
+// Click / tap to navigate
+renderer.domElement.addEventListener('pointerdown', (e) => {
+  const rect = renderer.domElement.getBoundingClientRect();
+  mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObject(islandMesh);
+  if (intersects.length > 0) {
+    const pt = intersects[0].point;
+    const dist = Math.sqrt(pt.x * pt.x + pt.z * pt.z);
+    if (dist < islandRadius - 1.6) {
+      targetPosition = new THREE.Vector3(pt.x, 0, pt.z);
+    }
+  }
+});
+
+// Global navigation hooks connected to the bottom 3D box controls
+window.characterNavigateTo = function(x, z) {
+  targetPosition = new THREE.Vector3(x, 0, z);
+};
+
+window.navigateToAbout = () => window.characterNavigateTo(-10, -1);
+window.navigateToProjects = () => window.characterNavigateTo(10, -1);
+window.navigateToContact = () => window.characterNavigateTo(3.2, 10.5);
+
+// Animation Loop
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const delta = Math.min(clock.getDelta(), 0.1);
+  const elapsed = clock.getElapsedTime();
+
+  // Floating clouds gentle drift
+  cloudsGroup.children.forEach((cloud) => {
+    cloud.position.x += cloud.userData.speed * 60 * delta;
+    cloud.position.y = cloud.userData.baseY + Math.sin(elapsed * 1.2 + cloud.position.x * 0.1) * 0.5;
+    if (cloud.position.x > 38) cloud.position.x = -38;
+  });
+
+  // Character movement
+  let moveX = 0;
+  let moveZ = 0;
+
+  if (keys.w || keys.arrowup) moveZ -= 1;
+  if (keys.s || keys.arrowdown) moveZ += 1;
+  if (keys.a || keys.arrowleft) moveX -= 1;
+  if (keys.d || keys.arrowright) moveX += 1;
+
+  isMoving = false;
+
+  if (moveX !== 0 || moveZ !== 0) {
+    const inputDir = new THREE.Vector2(moveX, moveZ).normalize();
+    const newX = character.position.x + inputDir.x * moveSpeed * delta;
+    const newZ = character.position.z + inputDir.y * moveSpeed * delta;
+
+    const radius = Math.sqrt(newX * newX + newZ * newZ);
+    if (radius < islandRadius - 1.5) {
+      character.position.x = newX;
+      character.position.z = newZ;
+    }
+
+    const targetRot = Math.atan2(inputDir.x, inputDir.y);
+    character.rotation.y += (targetRot - character.rotation.y) * rotateSpeed * delta;
+    isMoving = true;
+  } else if (targetPosition) {
+    const dir = new THREE.Vector3().subVectors(targetPosition, character.position);
+    dir.y = 0;
+    const distance = dir.length();
+    
+    if (distance > 0.18) {
+      dir.normalize();
+      character.position.x += dir.x * moveSpeed * delta;
+      character.position.z += dir.z * moveSpeed * delta;
+      
+      const targetRot = Math.atan2(dir.x, dir.z);
+      character.rotation.y += (targetRot - character.rotation.y) * rotateSpeed * delta;
+      isMoving = true;
+    } else {
+      targetPosition = null;
+    }
+  }
+
+  // Refined natural walk cycle
+  if (isMoving) {
+    walkCycle += delta * 12;
+    leftLeg.rotation.x = Math.sin(walkCycle) * 0.6;
+    rightLeg.rotation.x = -Math.sin(walkCycle) * 0.6;
+    leftArm.rotation.x = -Math.sin(walkCycle) * 0.5;
+    rightArm.rotation.x = Math.sin(walkCycle) * 0.5;
+    charBody.position.y = 0.95 + Math.abs(Math.sin(walkCycle * 2)) * 0.07;
+    charHead.position.y = 1.8 + Math.abs(Math.sin(walkCycle * 2)) * 0.07;
+  } else {
+    leftLeg.rotation.x = 0;
+    rightLeg.rotation.x = 0;
+    leftArm.rotation.x = 0;
+    rightArm.rotation.x = 0;
+    charBody.position.y = 0.95 + Math.sin(elapsed * 2.2) * 0.015;
+    charHead.position.y = 1.8 + Math.sin(elapsed * 2.2) * 0.02;
+  }
+
+  // Dynamic distance calculation and floating marker update for "My Work" and "Contact"
+  activeDistanceMarkers.forEach((lm, index) => {
+    if (lm.markerMesh) {
+      // Gentle floating bob
+      lm.markerMesh.position.y = lm.pos.y + Math.sin(elapsed * 2.4 + index * 1.5) * 0.22;
+
+      // Distance calculation in meters (1 unit = 1 meter)
+      const dx = character.position.x - lm.worldPos.x;
+      const dz = character.position.z - lm.worldPos.z;
+      const dist = Math.sqrt(dx * dx + dz * dz);
+      const roundedDist = dist.toFixed(1) + 'm';
+
+      // Update canvas texture only if value changed
+      const uData = lm.markerMesh.userData;
+      if (uData && uData.lastDistance !== roundedDist) {
+        uData.lastDistance = roundedDist;
+        uData.renderMarkerContent(roundedDist);
+        uData.texture.needsUpdate = true;
+      }
+    }
+  });
+
+  // Smooth camera tracking
+  const idealCamPos = new THREE.Vector3(
+    character.position.x * 0.42,
+    21.0,
+    character.position.z * 0.42 + 28.5
+  );
+  camera.position.lerp(idealCamPos, delta * 3.0);
+  camera.lookAt(character.position.x * 0.28, 2.0, character.position.z * 0.28);
+
+  renderer.render(scene, camera);
+}
+
+animate();
+
+// Resize
+function onWindowResize() {
+  const newW = containerElement.clientWidth || window.innerWidth;
+  const newH = containerElement.clientHeight || window.innerHeight;
+  camera.aspect = newW / newH;
+  camera.updateProjectionMatrix();
+  renderer.setSize(newW, newH);
+}
+window.addEventListener('resize', onWindowResize);
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_20 --><div class="relative z-10 w-full h-full pointer-events-none flex flex-col justify-between p-6 sm:p-10"><div class="w-full flex flex-col items-center pt-4 md:pt-8 pointer-events-none"><h1 class="font-headline-lg text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-center title-stroke mb-3.5 transition-transform hover:scale-105 duration-300 drop-shadow-sm">Virakâ€™s World</h1><button class="pointer-events-auto torn-paper craft-shadow craft-shadow-pressed px-5 py-2 sm:px-6 sm:py-2.5 bg-[#fceecf] hover:bg-[#fff5dc] active:bg-[#f3dfbf] text-[#2c1d11] font-headline-sm font-bold text-sm sm:text-base tracking-wide flex items-center gap-1.5 transition-all duration-200 border-t border-[#fff9ec] border-b border-[#ddbe8d]" onclick="if(window.characterNavigateTo) { window.characterNavigateTo(0, 0); } else if(window.navigateToProjects) { window.navigateToProjects(); }" type="button"><span>Explore World</span><span class="text-sm font-bold opacity-80">&gt;</span></button></div><div class="w-full relative pb-4 sm:pb-8 pointer-events-none flex items-center justify-center"><div class="absolute left-0 bottom-4 sm:bottom-8 hidden sm:flex items-center gap-2.5 px-3.5 py-2 rounded-xl wasd-badge text-[#2c221e]"><div class="flex items-center gap-1.5"><span class="w-6 h-6 rounded flex items-center justify-center font-label-keycap text-[11px] font-bold wasd-key">W</span><span class="w-6 h-6 rounded flex items-center justify-center font-label-keycap text-[11px] font-bold wasd-key">A</span><span class="w-6 h-6 rounded flex items-center justify-center font-label-keycap text-[11px] font-bold wasd-key">S</span><span class="w-6 h-6 rounded flex items-center justify-center font-label-keycap text-[11px] font-bold wasd-key">D</span></div><span class="text-[11px] font-headline-sm font-extrabold uppercase tracking-widest text-[#442c1d] ml-1">MOVE</span></div><div class="flex items-center gap-2.5 sm:gap-4 md:gap-6 pointer-events-auto"><button class="torn-paper craft-shadow craft-shadow-pressed px-4 py-2 sm:px-5 sm:py-2.5 bg-[#f5e6cc] hover:bg-[#faeed6] active:bg-[#ebd7b8] text-[#2c1d11] font-headline-sm font-bold text-xs sm:text-sm tracking-wide flex items-center gap-1.5 transition-all duration-200 border-t border-[#fff9ec] border-b border-[#cfae7d] cursor-pointer" onclick="if(window.navigateToAbout) window.navigateToAbout();" type="button"><span>About Me</span><span class="text-xs font-bold opacity-75">&gt;</span></button><button class="torn-paper craft-shadow craft-shadow-pressed px-4 py-2 sm:px-5 sm:py-2.5 bg-[#f5e6cc] hover:bg-[#faeed6] active:bg-[#ebd7b8] text-[#2c1d11] font-headline-sm font-bold text-xs sm:text-sm tracking-wide flex items-center gap-1.5 transition-all duration-200 border-t border-[#fff9ec] border-b border-[#cfae7d] cursor-pointer" onclick="if(window.navigateToProjects) window.navigateToProjects();" type="button"><span>My Work</span><span class="text-xs font-bold opacity-75">&gt;</span></button><button class="torn-paper craft-shadow craft-shadow-pressed px-4 py-2 sm:px-5 sm:py-2.5 bg-[#f5e6cc] hover:bg-[#faeed6] active:bg-[#ebd7b8] text-[#2c1d11] font-headline-sm font-bold text-xs sm:text-sm tracking-wide flex items-center gap-1.5 transition-all duration-200 border-t border-[#fff9ec] border-b border-[#cfae7d] cursor-pointer" onclick="if(window.navigateToContact) window.navigateToContact();" type="button"><span>Contact</span><span class="text-xs font-bold opacity-75">&gt;</span></button></div></div></div></body></html>
